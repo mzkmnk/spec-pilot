@@ -6,8 +6,12 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { load } from "../utils/load";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const promptsDir = path.resolve(__dirname, "..", "..", "prompts");
+const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+// Handle dev (src) runs and bundled dist builds resolving from different roots.
+const packageRoot = moduleDir.includes(`${path.sep}dist`)
+  ? path.resolve(moduleDir, "..")
+  : path.resolve(moduleDir, "..", "..");
+const promptsDir = path.join(packageRoot, "prompts");
 const filePath = path.join(promptsDir, "greeting.md");
 
 export const registerGreetingPrompt = (server: McpServer) => {

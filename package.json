@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "mzkmnk",
   "type": "module",
+  "main": "dist/index.js",
   "engines": {
     "node": ">=22"
   },
@@ -15,7 +16,7 @@
     }
   },
   "bin": {
-    "spec-pilot": "./bin/spec-pilot.js"
+    "spec-pilot": "dist/index.js"
   },
   "types": "dist/index.d.ts",
   "files": [

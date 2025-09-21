@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";

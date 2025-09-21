@@ -1,9 +1,9 @@
 {
-  "name": "tsdown-pnpm-template",
-  "version": "0.1.0",
-  "description": "A TypeScript library template using pnpm, tsdown, ESLint, Prettier, and Vitest.",
+  "name": "spec-pilot",
+  "version": "0.0.1",
+  "description": "Spec Pilot MCP",
   "license": "MIT",
-  "author": "",
+  "author": "mzkmnk",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -20,7 +20,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap",
+    "build": "tsdown src/index.ts --format esm --dts --sourcemap",
     "clean": "rimraf dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -46,7 +46,7 @@
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.7.0",
     "vitest": "^3.2.4",
-    "zod": "^4.1.9"
+    "zod": "^3.25.8"
   },
   "packageManager": "pnpm@10.17.0"
 }

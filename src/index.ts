@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import path from "node:path";
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -24,24 +25,45 @@ server.registerPrompt(
       }),
     },
   },
-  async ({ name }) => ({
-    messages: [
-      {
-        role: "assistant",
-        content: {
-          type: "text",
-          text: load("prompts/greeting.md"),
+  async ({ name }) => {
+    const root = path.resolve(process.cwd(), "prompts");
+
+    const filePath = path.join(root, "greeting.md");
+
+    const md = load(filePath);
+
+    return {
+      messages: [
+        {
+          role: "assistant",
+          content: {
+            type: "text",
+            text: "以下のドキュメント（Markdown）のポリシーに従って、挨拶文を1〜2文で作成してください。",
+          },
         },
-      },
-      {
-        role: "assistant",
-        content: {
-          type: "text",
-          text: `こんにちは、${name}さん。`,
+        {
+          role: "assistant",
+          content: {
+            type: "resource",
+            resource: {
+              uri: `file://${filePath}`,
+              name: "greeting",
+              title: "Greeting Policy (Markdown)",
+              mimeType: "text/markdown",
+              text: md,
+            },
+          },
         },
-      },
-    ],
-  }),
+        {
+          role: "user",
+          content: {
+            type: "text",
+            text: `宛名は「${name}」です。テンプレートの ${"${name}"} を置き換え、砕けすぎない丁寧な日本語で出力してください。`,
+          },
+        },
+      ],
+    };
+  },
 );
 
 const transport = new StdioServerTransport();

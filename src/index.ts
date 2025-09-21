@@ -44,32 +44,43 @@ server.registerPrompt(
     return {
       messages: [
         {
-          role: "assistant",
-          content: {
-            type: "text",
-            text: "以下のドキュメント（Markdown）のポリシーに従って、挨拶文を1〜2文で作成してください。",
-          },
-        },
-        {
-          role: "assistant",
-          content: {
-            type: "resource",
-            resource: {
-              uri: `file://${filePath}`,
-              name: "greeting",
-              title: "Greeting Policy (Markdown)",
-              mimeType: "text/markdown",
-              text: md,
-            },
-          },
-        },
-        {
           role: "user",
           content: {
             type: "text",
-            text: `宛名は「${name}」です。テンプレートの ${"${name}"} を置き換え、砕けすぎない丁寧な日本語で出力してください。`,
+            text: `以下のMarkdownポリシーに従って、宛名「${name}」向けの挨拶文を1〜2文で作成してください。
+            ---POLICY---
+            ${md}
+            ---END POLICY---
+            テンプレートの \${name} を置き換え、砕けすぎない丁寧な日本語で出力してください。`,
           },
         },
+        // {
+        //   role: "assistant",
+        //   content: {
+        //     type: "text",
+        //     text: "以下のドキュメント（Markdown）のポリシーに従って、挨拶文を1〜2文で作成してください。",
+        //   },
+        // },
+        // {
+        //   role: "assistant",
+        //   content: {
+        //     type: "resource",
+        //     resource: {
+        //       uri: `file://${filePath}`,
+        //       name: "greeting",
+        //       title: "Greeting Policy (Markdown)",
+        //       mimeType: "text/markdown",
+        //       text: md,
+        //     },
+        //   },
+        // },
+        // {
+        //   role: "user",
+        //   content: {
+        //     type: "text",
+        //     text: `宛名は「${name}」です。テンプレートの ${"${name}"} を置き換え、砕けすぎない丁寧な日本語で出力してください。`,
+        //   },
+        // },
       ],
     };
   },

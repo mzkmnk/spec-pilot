@@ -19,15 +19,19 @@ export const server = new McpServer({
   version: "0.0.1",
 });
 
-server.registerTool("ping", {
-  title: 'health check',
-  description: "health check",
-  inputSchema: {
-    message: z.string().optional()
-  }
-}, async ({ message }) => ({
-  content: [{ type: "text", text: message ?? "pong" }]
-}));
+server.registerTool(
+  "ping",
+  {
+    title: "health check",
+    description: "health check",
+    inputSchema: {
+      message: z.string().optional(),
+    },
+  },
+  async ({ message }) => ({
+    content: [{ type: "text", text: message ?? "pong" }],
+  }),
+);
 
 // test code
 server.registerPrompt(
@@ -58,39 +62,12 @@ server.registerPrompt(
           content: {
             type: "text",
             text: `以下のMarkdownポリシーに従って、宛名「${name}」向けの挨拶文を1〜2文で作成してください。
+            また挨拶の後にmarkdownポリシーを出力してください。
             ---POLICY---
             ${md}
-            ---END POLICY---
-            テンプレートの \${name} を置き換え、砕けすぎない丁寧な日本語で出力してください。`,
+            ---END POLICY---`,
           },
         },
-        // {
-        //   role: "assistant",
-        //   content: {
-        //     type: "text",
-        //     text: "以下のドキュメント（Markdown）のポリシーに従って、挨拶文を1〜2文で作成してください。",
-        //   },
-        // },
-        // {
-        //   role: "assistant",
-        //   content: {
-        //     type: "resource",
-        //     resource: {
-        //       uri: `file://${filePath}`,
-        //       name: "greeting",
-        //       title: "Greeting Policy (Markdown)",
-        //       mimeType: "text/markdown",
-        //       text: md,
-        //     },
-        //   },
-        // },
-        // {
-        //   role: "user",
-        //   content: {
-        //     type: "text",
-        //     text: `宛名は「${name}」です。テンプレートの ${"${name}"} を置き換え、砕けすぎない丁寧な日本語で出力してください。`,
-        //   },
-        // },
       ],
     };
   },

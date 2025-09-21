@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import fs from "node:fs";
 import path from "node:path";
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -29,6 +30,14 @@ server.registerPrompt(
     const root = path.resolve(process.cwd(), "prompts");
 
     const filePath = path.join(root, "greeting.md");
+
+    if (!filePath.startsWith(root + path.sep)) {
+      throw new Error("Path traversal detected");
+    }
+
+    if (!fs.existsSync(filePath)) {
+      throw new Error("prompts/greeting.md が見つかりません");
+    }
 
     const md = load(filePath);
 

@@ -6,10 +6,20 @@ settings:
 
 importers:
   .:
-    devDependencies:
+    dependencies:
       "@modelcontextprotocol/sdk":
         specifier: ^1.18.0
         version: 1.18.0
+      tsdown:
+        specifier: 0.15.3
+        version: 0.15.3(typescript@5.9.2)
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.2
+      zod:
+        specifier: ^3.25.8
+        version: 3.25.76
+    devDependencies:
       "@types/node":
         specifier: ^22.13.14
         version: 22.18.5
@@ -37,21 +47,12 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
-      tsdown:
-        specifier: 0.15.3
-        version: 0.15.3(typescript@5.9.2)
-      typescript:
-        specifier: ^5.6.3
-        version: 5.9.2
       typescript-eslint:
         specifier: ^8.7.0
         version: 8.44.0(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@22.18.5)
-      zod:
-        specifier: ^3.25.8
-        version: 3.25.76
 
 packages:
   "@babel/generator@7.28.3":

@@ -21,7 +21,7 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "bin"
+    "prompts"
   ],
   "scripts": {
     "build": "tsdown src/index.ts --format esm --dts --sourcemap",

@@ -19,9 +19,12 @@ export const server = new McpServer({
   version: "0.0.1",
 });
 
-server.tool("ping", {
+server.registerTool("ping", {
+  title: 'health check',
   description: "health check",
-  inputSchema: z.object({ message: z.string().optional() }),
+  inputSchema: {
+    message: z.string().optional()
+  }
 }, async ({ message }) => ({
   content: [{ type: "text", text: message ?? "pong" }]
 }));

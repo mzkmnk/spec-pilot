@@ -1,5 +1,5 @@
-import fs from 'node:fs';
+import fs from "node:fs";
 
 export const load = (path: string) => {
-  return fs.readFileSync(path, 'utf8')
-}
+  return fs.readFileSync(path, "utf8");
+};

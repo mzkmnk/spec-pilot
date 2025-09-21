@@ -34,7 +34,7 @@ server.registerPrompt(
         },
       },
       {
-        role: "user",
+        role: "assistant",
         content: {
           type: "text",
           text: `こんにちは、${name}さん。`,

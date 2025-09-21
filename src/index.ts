@@ -2,11 +2,16 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { load } from "./utils/load";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const promptsDir = path.resolve(__dirname, "..", "prompts");
+const filePath = path.join(promptsDir, "greeting.md");
 
 export const server = new McpServer({
   name: "spec-pilot",
@@ -27,16 +32,11 @@ server.registerPrompt(
     },
   },
   async ({ name }) => {
-    const root = path.resolve(process.cwd(), "prompts");
-
-    const filePath = path.join(root, "greeting.md");
-
-    if (!filePath.startsWith(root + path.sep)) {
+    if (!filePath.startsWith(promptsDir + path.sep)) {
       throw new Error("Path traversal detected");
     }
-
     if (!fs.existsSync(filePath)) {
-      throw new Error("prompts/greeting.md が見つかりません");
+      throw new Error(`同梱ファイルが見つかりません: ${filePath}`);
     }
 
     const md = load(filePath);

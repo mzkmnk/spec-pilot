@@ -1,9 +1,9 @@
 {
-  "name": "tsdown-pnpm-template",
-  "version": "0.1.0",
-  "description": "A TypeScript library template using pnpm, tsdown, ESLint, Prettier, and Vitest.",
+  "name": "spec-pilot",
+  "version": "0.0.1",
+  "description": "Spec Pilot MCP",
   "license": "MIT",
-  "author": "",
+  "author": "mzkmnk",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -20,7 +20,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --sourcemap",
+    "build": "tsdown src/index.ts --format esm --dts --sourcemap",
     "clean": "rimraf dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -32,10 +32,10 @@
     "prepack": "pnpm clean && pnpm build && pnpm test"
   },
   "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.0",
     "@types/node": "^22.13.14",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "typescript-eslint": "^8.7.0",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.29.1",
@@ -44,7 +44,9 @@
     "rimraf": "^6.0.1",
     "tsdown": "0.15.3",
     "typescript": "^5.6.3",
-    "vitest": "^3.2.4"
+    "typescript-eslint": "^8.7.0",
+    "vitest": "^3.2.4",
+    "zod": "^3.25.8"
   },
   "packageManager": "pnpm@10.17.0"
 }

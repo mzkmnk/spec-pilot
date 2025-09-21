@@ -2,7 +2,7 @@ import { completable } from "@modelcontextprotocol/sdk/server/completable.js";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { load } from "./utils/load";
+import { load } from "./utils/load.ts";
 
 export const server = new McpServer({
   name: "spec-pilot",

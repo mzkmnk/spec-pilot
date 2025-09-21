@@ -32,10 +32,16 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "prepack": "pnpm clean && pnpm build && pnpm test"
+    "prepare": "npm run build",
+    "prepack": "npm run clean && npm run build && npm run test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.0",
+    "tsdown": "0.15.3",
+    "typescript": "^5.6.3",
+    "zod": "^3.25.8"
   },
   "devDependencies": {
-    "@modelcontextprotocol/sdk": "^1.18.0",
     "@types/node": "^22.13.14",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
@@ -45,11 +51,8 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
-    "tsdown": "0.15.3",
-    "typescript": "^5.6.3",
     "typescript-eslint": "^8.7.0",
-    "vitest": "^3.2.4",
-    "zod": "^3.25.8"
+    "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.17.0"
 }

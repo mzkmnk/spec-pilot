@@ -33,9 +33,9 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         writeConfig({ locale: effectiveLocale });
       }
 
-      const prompt =  [
+      const prompt = [
         "# Spec Workspace Initialization",
-      
+
         "## Language Policy",
         `- Read locale from \`${CONFIG_FILE}\` as JSON (key: "locale").`,
         "- Allowed: ja | en ",
@@ -43,18 +43,18 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         "- Thinking rule: Always think in English; generate only in the resolved output language.",
         "- Apply to ALL natural language text (headings, bullet labels, explanations).",
         "- Keep code, file paths, and JSON keys as-is unless explicitly asked to translate.",
-      
+
         "## Input (User Description)",
         `${specDescription}`,
-      
+
         "## Goal",
         `- Create a working folder under \`${BASE_DIR}\` for this spec and prepare the foundation that subsequent spec prompts will reference.`,
-      
+
         "## Slug Guidelines",
         "- Use lowercase ASCII letters, digits, and hyphens; normalize other symbols to hyphens.",
         "- Collapse repeated hyphens; avoid leading/trailing hyphens; keep within 48 characters.",
         "- Capture the essence of the spec (domain + feature). Add `-01` or a date suffix if you need uniqueness.",
-      
+
         "## Requirements",
         "1. Ensure `.kiro` and `.kiro/specs` exist; create them as directories if missing (no placeholder files).",
         `2. Decide a slug following the guidelines above and use \`${BASE_DIR}/<slug>\` as the folder path.`,
@@ -65,12 +65,12 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         "5. After creation, instruct to run `@spec.create-requirement` next (pass the new folder name as specName).",
         "6. Record the rationale for the folder name, conflict resolution, and existence verification for future agents.",
         `7. Store { "locale": "${effectiveLocale}" } in \`${CONFIG_FILE}\` so later prompts can reuse the language (update if it already exists).`,
-      
+
         "## Checks",
         `- Record whether \`${BASE_DIR}\` and \`${BASE_DIR}/<slug>\` are directories.`,
         `- Note the locale stored in \`${CONFIG_FILE}\` (expected: "${effectiveLocale}") and describe how to correct it if mismatched.`,
         "- If creation failed, state the reason and a retry plan (permissions, wrong path, conflicts, etc.).",
-      
+
         "## Output",
         "- IMPORTANT: Translate all headings, bullet labels, and explanatory text into the resolved output language.",
         "- Keep code fences, paths, and JSON keys unchanged.",
@@ -84,7 +84,6 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         "",
         "- If the name is not finalized, list missing info in `notes` and request re-input.",
       ].join("\n");
-      
 
       return {
         messages: [
@@ -92,7 +91,7 @@ export const registerSpecInitPrompt = (server: McpServer) => {
             role: "user",
             content: {
               type: "text",
-              text: prompt
+              text: prompt,
             },
           },
         ],

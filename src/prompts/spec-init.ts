@@ -10,18 +10,18 @@ export const registerSpecInitPrompt = (server: McpServer) => {
     "spec.init",
     {
       title: "initialize spec workspace",
-      description: "仕様駆動開発用のディレクトリを初期化し、後続プロンプトの実行手順を案内する。",
+      description: "Initialize the spec-driven development workspace and guide the follow-up prompts.",
       argsSchema: {
         specDescription: z
           .string()
-          .min(5, "仕様の説明は5文字以上で入力してください。")
+          .min(5, "Please provide at least 5 characters for the spec description.")
           .describe(
-            "今回作成する仕様の簡潔な説明（日本語/英語可）。スラッグ候補の生成に使用します。",
+            "Concise description (Japanese or English) of the spec to create. Used to derive the workspace slug.",
           ),
         locale: z
           .enum(["ja", "en"]) // output language
           .optional()
-          .describe("出力言語（ja/en）。省略時は設定ファイルまたはja。"),
+          .describe("Output language (ja/en). Defaults to stored locale or ja if absent."),
       },
     },
     async ({ specDescription, locale }) => {

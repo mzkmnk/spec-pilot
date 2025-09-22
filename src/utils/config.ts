@@ -56,4 +56,3 @@ export const writeConfig = (updates: Partial<SpecPilotConfig>) => {
     return undefined;
   }
 };
-

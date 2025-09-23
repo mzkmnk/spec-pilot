@@ -10,7 +10,8 @@ export const registerSpecInitPrompt = (server: McpServer) => {
     "spec.init",
     {
       title: "initialize spec workspace",
-      description: "Initialize the spec-driven development workspace and guide the follow-up prompts.",
+      description:
+        "Initialize the spec-driven development workspace and guide the follow-up prompts.",
       argsSchema: {
         specDescription: z
           .string()

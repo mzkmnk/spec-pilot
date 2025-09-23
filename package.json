@@ -1,7 +1,7 @@
 {
   "name": "spec-pilot",
   "version": "0.0.1",
-  "description": "Spec Pilot MCP",
+  "description": "MCP (Model Context Protocol) server supporting spec-driven development. Automates EARS-format requirements definition and comprehensive design document generation.",
   "license": "MIT",
   "author": "mzkmnk",
   "type": "module",

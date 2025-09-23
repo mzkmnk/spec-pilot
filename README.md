@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/mzkmnk-spec-pilot-badge.png)](https://mseep.ai/app/mzkmnk-spec-pilot)
+
 # Spec Pilot
 
 **スペック駆動開発をサポートするMCP (Model Context Protocol) サーバー**

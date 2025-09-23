@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { registerGreetingPrompt } from "./prompts/greeting";
 import { registerSpecInitPrompt } from "./prompts/spec-init";
+import { registerSpecRequirementsPrompt } from "./prompts/spec-requirements";
 
 export const server = new McpServer({
   name: "spec-pilot",
@@ -28,6 +29,7 @@ server.registerTool(
 
 registerGreetingPrompt(server);
 registerSpecInitPrompt(server);
+registerSpecRequirementsPrompt(server);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

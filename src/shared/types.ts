@@ -7,7 +7,7 @@ export const SUPPORTED_LOCALES = ["ja", "en"] as const;
 /**
  * ロケール型定義
  */
-export type Locale = typeof SUPPORTED_LOCALES[number];
+export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 /**
  * ロケールが有効かどうかをチェックする型ガード

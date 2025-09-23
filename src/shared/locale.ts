@@ -14,21 +14,18 @@ export interface LocaleConfig {
  * @param options ロケール設定オプション
  * @returns 解決されたロケール
  */
-export const resolveLocale = (
-  inputLocale?: Locale, 
-  options: LocaleConfig = {}
-): Locale => {
+export const resolveLocale = (inputLocale?: Locale, options: LocaleConfig = {}): Locale => {
   const config = readConfig();
   const storedLocale = isValidLocale(config.locale) ? config.locale : undefined;
   const effectiveLocale = inputLocale ?? storedLocale ?? options.fallback ?? DEFAULT_LOCALE;
-  
+
   // 設定更新ロジック
   // 1. 保存されたロケールがない場合
   // 2. ユーザーが明示的にロケールを指定した場合
   if (!storedLocale || inputLocale) {
     writeConfig({ locale: effectiveLocale });
   }
-  
+
   return effectiveLocale;
 };
 

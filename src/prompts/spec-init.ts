@@ -23,7 +23,9 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         locale: z
           .enum(SUPPORTED_LOCALES)
           .optional()
-          .describe(`Output language (${SUPPORTED_LOCALES.join("/")}). Defaults to stored locale or ja if absent.`),
+          .describe(
+            `Output language (${SUPPORTED_LOCALES.join("/")}). Defaults to stored locale or ja if absent.`,
+          ),
       },
     },
     async ({ specDescription, locale }) => {
@@ -75,7 +77,7 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         `- next: "Run @spec.create-requirements with specName=<folder>"`,
         `- notes: "<optional>"`,
         "",
-        "- If the name is not finalized, list missing info in `notes` and request re-input."
+        "- If the name is not finalized, list missing info in `notes` and request re-input.",
       );
 
       return createPromptResponse(prompt);

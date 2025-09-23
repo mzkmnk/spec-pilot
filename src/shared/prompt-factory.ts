@@ -43,6 +43,6 @@ export const createPromptResponse = (content: string): PromptResponse => ({
  */
 export const joinPromptSections = (...sections: (string | string[])[]): string => {
   return sections
-    .map(section => Array.isArray(section) ? section.join("\n") : section)
+    .map((section) => (Array.isArray(section) ? section.join("\n") : section))
     .join("\n");
 };

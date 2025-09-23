@@ -40,7 +40,7 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
         `- Requirements file to create/update: \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}/${SPEC_PILOT_CONSTANTS.REQUIREMENTS_FILE}\``,
         "",
         "## Goal",
-        "- Validate the initialized spec workspace and convert the specification description into structured, testable EARS statements while matching the target requirements house style." ,
+        "- Validate the initialized spec workspace and convert the specification description into structured, testable EARS statements while matching the target requirements house style.",
         "",
         "## Tasks",
         "1. Verify the workspace:",

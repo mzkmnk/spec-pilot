@@ -86,7 +86,7 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
         `- requirementsFile: "${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}/${SPEC_PILOT_CONSTANTS.REQUIREMENTS_FILE}"`,
         `- workspaceCheck: "<directory and config validation summary>"`,
         `- highlights: "<representative requirements or decisions>"`,
-        `- next: "<recommended follow-up prompt or action>"`,
+        `- next: "Run @spec.design with specName=<folder>"`,
         `- notes: "<open questions or blockers>"`,
         "",
         "- If the workspace is invalid or information is missing, clearly state what needs to be fixed before retrying.",

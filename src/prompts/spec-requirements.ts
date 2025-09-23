@@ -9,7 +9,7 @@ const SPEC_CONFIG_FILE = "config.json";
 
 export const registerSpecRequirementsPrompt = (server: McpServer) => {
   server.registerPrompt(
-    "spec.requirements",
+    "spec.create-requirements",
     {
       title: "collect spec requirements",
       description: "Expand the initialized spec workspace with structured requirements.",

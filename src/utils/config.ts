@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
+import { SUPPORTED_LOCALES } from "../shared/types";
 
 const CONFIG_DIR = path.resolve(process.cwd(), ".kiro");
 const CONFIG_FILENAME = "spec-pilot.json";
@@ -8,7 +9,7 @@ const CONFIG_PATH = path.join(CONFIG_DIR, CONFIG_FILENAME);
 
 const ConfigSchema = z
   .object({
-    locale: z.enum(["ja", "en"]).optional(),
+    locale: z.enum(SUPPORTED_LOCALES).optional(),
   })
   .passthrough();
 

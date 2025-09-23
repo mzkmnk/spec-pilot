@@ -1,11 +1,9 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { readConfig, writeConfig } from "../utils/config";
-
-const BASE_DIR = ".kiro/specs";
-const CONFIG_FILE = ".kiro/spec-pilot.json";
-const REQUIREMENTS_FILE = "requirements.md";
-const SPEC_CONFIG_FILE = "config.json";
+import { SPEC_PILOT_CONSTANTS } from "../shared/constants";
+import { createLanguagePolicySection } from "../shared/language-policy";
+import { resolveStoredLocale } from "../shared/locale";
+import { createPromptResponse, joinPromptSections } from "../shared/prompt-factory";
 
 export const registerSpecRequirementsPrompt = (server: McpServer) => {
   server.registerPrompt(
@@ -23,42 +21,31 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
       },
     },
     async ({ specName }) => {
-      const config = readConfig();
-      const storedLocale = typeof config.locale === "string" ? config.locale : undefined;
-      const effectiveLocale = (storedLocale ?? "ja") as "ja" | "en";
+      // ロケール解決（設定ファイルの更新のため実行するが、この場所では値は使用しない）
+      resolveStoredLocale();
 
-      if (!storedLocale) {
-        writeConfig({ locale: effectiveLocale });
-      }
-
-      const prompt = [
+      const prompt = joinPromptSections(
         "# Spec Requirements Development",
         "",
-        "## Language Policy",
-        `- Read locale from \`${CONFIG_FILE}\` as JSON (key: "locale").`,
-        "- Allowed values: ja | en.",
-        "- If missing, invalid, or unreadable: fallback to en and state that fallback in the output.",
-        "- Thinking rule: Always reason in English; generate only in the resolved output language.",
-        "- Apply the policy to all natural-language text (headings, bullet labels, explanations).",
-        "- Keep code, file paths, JSON keys, and CLI commands unchanged unless explicitly requested.",
+        createLanguagePolicySection(SPEC_PILOT_CONSTANTS.CONFIG_FILE),
         "",
         "## Inputs",
         `- specName: ${specName}`,
         "- specDescription: (read from config.json and treat as authoritative source)",
         "",
         "## Workspace Context",
-        `- Base directory: \`${BASE_DIR}\``,
-        `- Spec folder path: \`${BASE_DIR}/${specName}\``,
-        `- Mandatory config file: \`${BASE_DIR}/${specName}/${SPEC_CONFIG_FILE}\``,
-        `- Requirements file to create/update: \`${BASE_DIR}/${specName}/${REQUIREMENTS_FILE}\``,
+        `- Base directory: \`${SPEC_PILOT_CONSTANTS.BASE_DIR}\``,
+        `- Spec folder path: \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}\``,
+        `- Mandatory config file: \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}/${SPEC_PILOT_CONSTANTS.SPEC_CONFIG_FILE}\``,
+        `- Requirements file to create/update: \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}/${SPEC_PILOT_CONSTANTS.REQUIREMENTS_FILE}\``,
         "",
         "## Goal",
         "- Validate the initialized spec workspace and convert the specification description into structured, testable EARS statements while matching the target requirements house style." ,
         "",
         "## Tasks",
         "1. Verify the workspace:",
-        `   - Ensure \`${BASE_DIR}\` and \`${BASE_DIR}/${specName}\` are directories.`,
-        `   - Confirm \`${BASE_DIR}/${specName}/${SPEC_CONFIG_FILE}\` exists, parse as JSON, and capture the current title and description for context.`,
+        `   - Ensure \`${SPEC_PILOT_CONSTANTS.BASE_DIR}\` and \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}\` are directories.`,
+        `   - Confirm \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}/${SPEC_PILOT_CONSTANTS.SPEC_CONFIG_FILE}\` exists, parse as JSON, and capture the current title and description for context.`,
         "   - Note any mismatches or missing metadata that could affect requirement interpretation.",
         "2. Understand the specification description:",
         "   - Summarize the description into a concise product overview paragraph for the document's Overview section.",
@@ -71,7 +58,7 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
         "   - Every acceptance criterion must be an EARS clause such as `WHEN ... THEN THE SYSTEM SHALL ...`, `WHILE ... THE SYSTEM SHALL ...`, or `IF ... THEN THE SYSTEM SHALL ...`.",
         "   - Provide three to five acceptance criteria per requirement and introduce distinct requirement entries for architectural patterns, service separation, compatibility, and testing strategy when relevant.",
         "4. Write the Markdown document:",
-        `   - Write to \`${REQUIREMENTS_FILE}\` in Markdown.`,
+        `   - Write to \`${SPEC_PILOT_CONSTANTS.REQUIREMENTS_FILE}\` in Markdown.`,
         "   - Structure the document exactly as:",
         "     - `# Requirements Document`",
         "     - `## Overview` (single-paragraph summary)",
@@ -82,8 +69,8 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
         "   - Capture unresolved issues as bullet points when the Notes section is present.",
         "",
         "## Checks",
-        `- Report directory checks for \`${BASE_DIR}\` and \`${BASE_DIR}/${specName}\`.`,
-        `- Confirm \`${SPEC_CONFIG_FILE}\` was readable and summarize key fields (title, description).`,
+        `- Report directory checks for \`${SPEC_PILOT_CONSTANTS.BASE_DIR}\` and \`${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}\`.`,
+        `- Confirm \`${SPEC_PILOT_CONSTANTS.SPEC_CONFIG_FILE}\` was readable and summarize key fields (title, description).`,
         `- Verify the Markdown includes \`# Requirements Document\`, \`## Overview\`, and \`## Requirements\` in that order.`,
         "- Ensure each requirement heading follows `### Requirement <number>:` with contiguous numbering and unique titles.",
         "- Ensure every requirement contains a user story and at least three EARS-style acceptance criteria numbered 1., 2., 3., ....",
@@ -96,26 +83,16 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
         "",
         "# Spec Requirements Result",
         `- specFolder: "${specName}"`,
-        `- requirementsFile: "${BASE_DIR}/${specName}/${REQUIREMENTS_FILE}"`,
+        `- requirementsFile: "${SPEC_PILOT_CONSTANTS.BASE_DIR}/${specName}/${SPEC_PILOT_CONSTANTS.REQUIREMENTS_FILE}"`,
         `- workspaceCheck: "<directory and config validation summary>"`,
         `- highlights: "<representative requirements or decisions>"`,
         `- next: "<recommended follow-up prompt or action>"`,
         `- notes: "<open questions or blockers>"`,
         "",
         "- If the workspace is invalid or information is missing, clearly state what needs to be fixed before retrying.",
-      ].join("\n");
+      );
 
-      return {
-        messages: [
-          {
-            role: "user",
-            content: {
-              type: "text",
-              text: prompt,
-            },
-          },
-        ],
-      };
+      return createPromptResponse(prompt);
     },
   );
 };

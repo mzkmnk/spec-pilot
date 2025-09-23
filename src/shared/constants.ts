@@ -6,6 +6,7 @@ export const SPEC_PILOT_CONSTANTS = {
   CONFIG_FILE: ".kiro/spec-pilot.json",
   REQUIREMENTS_FILE: "requirements.md",
   DESIGN_FILE: "design.md",
+  TASKS_FILE: "tasks.md",
   SPEC_CONFIG_FILE: "config.json",
 } as const;
 

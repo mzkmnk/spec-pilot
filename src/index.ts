@@ -7,6 +7,7 @@ import { registerGreetingPrompt } from "./prompts/greeting";
 import { registerSpecDesignPrompt } from "./prompts/spec-design";
 import { registerSpecInitPrompt } from "./prompts/spec-init";
 import { registerSpecRequirementsPrompt } from "./prompts/spec-requirements";
+import { registerSpecTasksPrompt } from "./prompts/spec-tasks";
 
 export const server = new McpServer({
   name: "spec-pilot",
@@ -32,6 +33,7 @@ registerGreetingPrompt(server);
 registerSpecInitPrompt(server);
 registerSpecRequirementsPrompt(server);
 registerSpecDesignPrompt(server);
+registerSpecTasksPrompt(server);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

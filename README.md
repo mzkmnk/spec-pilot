@@ -9,6 +9,7 @@ Spec Pilot is an MCP server that supports specification-driven development throu
 - **Structured development workflow**: Step-by-step process from specifications → requirements → design
 - **EARS-based requirements management**: Clear, testable acceptance criteria
 - **Comprehensive design generation**: From architecture to implementation strategies
+- **Implementation task generation**: Translate specs into actionable development plans
 - **Multilingual support**: Output available in Japanese and English
 - **MCP protocol**: Easy integration with AI agents
 
@@ -39,24 +40,40 @@ This project has been independently assessed by MseeP.ai.
 - Plan migration and testing strategies
 - Address performance and security considerations
 
-### 4. Greeting (`greeting`)
+### 4. Implementation Task Generation (`spec.create-tasks`)
+
+- Convert requirements and design artifacts into actionable task lists
+- Provide TDD-ready task breakdowns and requirement traceability
+- Output tasks in a hierarchy suitable for issue trackers
+
+### 5. Greeting (`greeting`)
 
 - Provide a basic greeting and display project policies
 
 ## Usage
 
-Spec Pilot exposes four MCP prompts. Each one accepts defined arguments and returns structured responses.
+Spec Pilot exposes five MCP prompts. Each one accepts defined arguments and returns structured responses.
 
 ### Available Prompts
 
-| Prompt Name                | Description              | Required Arguments         | Optional Arguments |
-| -------------------------- | ------------------------ | -------------------------- | ------------------ |
-| `greeting`                 | Greeting and policy info | `name` (string)            | -                  |
-| `spec.init`                | Initialize workspace     | `specDescription` (string) | `locale` (ja/en)   |
-| `spec.create-requirements` | Generate requirements    | `specName` (string)        | -                  |
-| `spec.design`              | Generate design document | `specName` (string)        | -                  |
+| Prompt Name                | Description                     | Required Arguments         | Optional Arguments |
+| -------------------------- | ------------------------------- | -------------------------- | ------------------ |
+| `greeting`                 | Greeting and policy info        | `name` (string)            | -                  |
+| `spec.init`                | Initialize workspace            | `specDescription` (string) | `locale` (ja/en)   |
+| `spec.create-requirements` | Generate requirements           | `specName` (string)        | -                  |
+| `spec.design`              | Generate design document        | `specName` (string)        | -                  |
+| `spec.create-tasks`        | Generate implementation tasks   | `specName` (string)        | -                  |
 
 ### Examples
+
+#### Claude Desktop
+
+```
+@spec.init specDescription="Build a user authentication system" locale="en"
+@spec.create-requirements specName="user-auth-system"
+@spec.design specName="user-auth-system"
+@spec.create-tasks specName="user-auth-system"
+```
 
 #### Amazon Q CLI
 
@@ -76,6 +93,12 @@ Spec Pilot exposes four MCP prompts. Each one accepts defined arguments and retu
 
 ```
 @spec.design "user-auth-system"
+```
+
+**Generate implementation tasks:**
+
+```
+@spec.create-tasks "user-auth-system"
 ```
 
 ## File Details
@@ -101,6 +124,7 @@ Spec Pilot exposes four MCP prompts. Each one accepts defined arguments and retu
 
 - **`requirements.md`**: Structured requirements document with EARS-based acceptance criteria
 - **`design.md`**: Comprehensive design document covering architecture, component design, migration strategy, and more
+- **`tasks.md`**: Hierarchical implementation task list derived from requirements and design artifacts (TDD compatible)
 
 ## Configuration
 
@@ -145,16 +169,12 @@ pnpm clean          # Remove build artifacts
 - [x] Workspace initialization (`spec.init`)
 - [x] Requirements generation (`spec.create-requirements`)
 - [x] Design document generation (`spec.design`)
+- [x] Implementation task generation (`spec.create-tasks`)
 - [x] Multilingual support (Japanese & English)
 - [x] Generation of EARS-based acceptance criteria
+- [x] TDD-style task breakdowns and requirement traceability
 
 ### Planned Features
-
-- [ ] **Task generation (`spec.tasks`)** - Automatically create implementation tasks from requirements and design
-  - [ ] Break down development tasks based on requirements
-  - [ ] Generate implementation steps from design documents
-  - [ ] Integrate with GitHub Issues / project management tools
-  - [ ] Support prioritization and scheduling
 
 - [ ] **Publish as an npm package**
   - [ ] Optimize package metadata
@@ -174,3 +194,7 @@ pnpm clean          # Remove build artifacts
 ## License
 
 MIT License — see [LICENSE](./LICENSE) for details.
+
+## Author
+
+mzkmnk

@@ -66,9 +66,11 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         "5. After creation, instruct to run `@spec.create-requirement` next (pass the new folder name as specName).",
         "6. Record the rationale for the folder name, conflict resolution, and existence verification for future agents.",
         `7. Store { "locale": "${effectiveLocale}" } in \`${CONFIG_FILE}\` so later prompts can reuse the language (update if it already exists).`,
+        `8. Create \`${BASE_DIR}/<folder>/config.json\` containing JSON with "title" set to "<folder>" (the finalized folder name) and "description" set to the provided spec description. Overwrite if it already exists to keep the latest values.`,
 
         "## Checks",
         `- Record whether \`${BASE_DIR}\` and \`${BASE_DIR}/<slug>\` are directories.`,
+        `- Confirm \`${BASE_DIR}/<folder>/config.json\` exists with "title" set to "<folder>" and "description" matching the provided spec description.`,
         `- Note the locale stored in \`${CONFIG_FILE}\` (expected: "${effectiveLocale}") and describe how to correct it if mismatched.`,
         "- If creation failed, state the reason and a retry plan (permissions, wrong path, conflicts, etc.).",
 

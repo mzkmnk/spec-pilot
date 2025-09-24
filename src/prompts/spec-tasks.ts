@@ -73,7 +73,7 @@ export const registerSpecTasksPrompt = (server: McpServer) => {
         "4. Apply task formatting standards:",
         "   - Use checkbox format: `- [ ]` for incomplete tasks, `- [x]` for completed tasks (all start as incomplete).",
         "   - Structure each task with: task number, descriptive title, bullet points for sub-activities.",
-        "   - Include requirement traceability linking tasks to their corresponding requirements.",
+        "   - Add compact requirement traceability at task end using format: `_req: X.Y, Z.W_` (language-neutral).",
         "   - Apply testing strategy as specified in the design document's test strategy section.",
         "   - Add technical specifications (library versions, configuration details, API endpoints).",
         "",

@@ -131,7 +131,7 @@ export const registerSpecTasksPrompt = (server: McpServer) => {
         `- phaseCount: "<number of implementation phases identified>"`,
         `- requirementCoverage: "<percentage or summary of requirements covered>"`,
         `- implementationApproach: "<development methodology and testing approach applied>"`,
-        `- next: "<recommended follow-up action or development start point>"`,
+        `- next: "Run @spec.impl-tasks tasks=<tasks>"`,
         `- notes: "<implementation considerations, assumptions, or dependencies>"`,
         "",
         "- If the workspace is invalid, requirements are missing, design is incomplete, or information is insufficient, clearly state what needs to be fixed before retrying.",

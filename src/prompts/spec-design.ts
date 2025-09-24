@@ -7,7 +7,7 @@ import { createPromptResponse, joinPromptSections } from "../shared/prompt-facto
 
 export const registerSpecDesignPrompt = (server: McpServer) => {
   server.registerPrompt(
-    "spec.design",
+    "spec.create-design",
     {
       title: "create system design",
       description: "Generate comprehensive system design document from requirements.",
@@ -138,7 +138,7 @@ export const registerSpecDesignPrompt = (server: McpServer) => {
         `- architecturalPattern: "<chosen architectural approach and justification>"`,
         `- componentCount: "<number of major components identified>"`,
         `- implementationComplexity: "<assessment of implementation complexity>"`,
-        `- next: "<recommended follow-up prompt or action>"`,
+        `- next: "Run @spec.create-tasks ${specName}"`,
         `- notes: "<design decisions, assumptions, or considerations>"`,
         "",
         "- If the workspace is invalid, requirements are missing, or information is insufficient, clearly state what needs to be fixed before retrying.",

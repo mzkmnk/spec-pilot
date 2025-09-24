@@ -56,13 +56,14 @@ Spec Pilot exposes five MCP prompts. Each one accepts defined arguments and retu
 
 ### Available Prompts
 
-| Prompt Name                | Description                   | Required Arguments         | Optional Arguments |
-| -------------------------- | ----------------------------- | -------------------------- | ------------------ |
-| `greeting`                 | Greeting and policy info      | `name` (string)            | -                  |
-| `spec.init`                | Initialize workspace          | `specDescription` (string) | `locale` (ja/en)   |
-| `spec.create-requirements` | Generate requirements         | `specName` (string)        | -                  |
-| `spec.design`              | Generate design document      | `specName` (string)        | -                  |
-| `spec.create-tasks`        | Generate implementation tasks | `specName` (string)        | -                  |
+| Prompt Name                | Description                   | Required Arguments                    | Optional Arguments |
+| -------------------------- | ----------------------------- | ------------------------------------- | ------------------ |
+| `greeting`                 | Greeting and policy info      | `name` (string)                       | -                  |
+| `spec.init`                | Initialize workspace          | `specDescription` (string)            | `locale` (ja/en)   |
+| `spec.create-requirements` | Generate requirements         | `specName` (string)                   | -                  |
+| `spec.design`              | Generate design document      | `specName` (string)                   | -                  |
+| `spec.create-tasks`        | Generate implementation tasks | `specName` (string)                   | -                  |
+| `spec.impl-tasks`          | Derive execution plans        | `specName` (string), `tasks` (string) | -                  |
 
 ### Examples
 
@@ -90,6 +91,12 @@ Spec Pilot exposes five MCP prompts. Each one accepts defined arguments and retu
 
 ```
 @spec.create-tasks "user-auth-system"
+```
+
+**Execute selected implementation tasks:**
+
+```
+@spec.impl-tasks "user-auth-system" "all tasks in phase 1"
 ```
 
 ## File Details

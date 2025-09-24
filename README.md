@@ -1,102 +1,86 @@
-[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/mzkmnk-spec-pilot-badge.png)](https://mseep.ai/app/mzkmnk-spec-pilot)
-
 # Spec Pilot
 
-**スペック駆動開発をサポートするMCP (Model Context Protocol) サーバー**
+**An MCP (Model Context Protocol) server that supports specification-driven development**
 
-Spec Pilotは、システム仕様の作成から設計まで、開発プロセス全体を構造化されたワークフローで支援するMCPサーバーです。EARS (Easy Approach to Requirements Syntax) 形式での要件定義と包括的な設計ドキュメント生成を自動化します。
+Spec Pilot is an MCP server that supports specification-driven development through a structured workflow that spans everything from drafting system specifications to delivering design assets. It automates requirement definition in the EARS (Easy Approach to Requirements Syntax) format and generates comprehensive design documents.
 
-## 概要
+## Overview
 
-- **構造化された開発プロセス**: 仕様 → 要件 → 設計の段階的なワークフロー
-- **EARS形式の要件管理**: テスト可能で明確な受け入れ基準
-- **包括的な設計生成**: アーキテクチャから実装戦略まで
-- **多言語サポート**: 日本語・英語での出力対応
-- **MCPプロトコル**: AI エージェントとの統合が容易
+- **Structured development workflow**: Step-by-step process from specifications → requirements → design
+- **EARS-based requirements management**: Clear, testable acceptance criteria
+- **Comprehensive design generation**: From architecture to implementation strategies
+- **Multilingual support**: Output available in Japanese and English
+- **MCP protocol**: Easy integration with AI agents
 
-## 主な機能
+### Verified By
 
-### 1. ワークスペース初期化 (`spec.init`)
+This project has been independently assessed by MseeP.ai.
 
-- `.kiro/specs/<slug>` ディレクトリの作成
-- プロジェクト設定ファイルの生成
-- 言語設定の保存
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/mzkmnk-spec-pilot-badge.png)](https://mseep.ai/app/mzkmnk-spec-pilot)
 
-### 2. 要件収集 (`spec.create-requirements`)
+## Key Features
 
-- ユーザーストーリーの構造化
-- EARS形式の受け入れ基準生成
-- テスト可能な要件ドキュメント作成
+### 1. Workspace Initialization (`spec.init`)
 
-### 3. 設計ドキュメント生成 (`spec.design`)
+- Create the `.kiro/specs/<slug>` directory
+- Generate project configuration files
+- Save language settings
 
-- システムアーキテクチャの設計
-- コンポーネント設計とAPI仕様
-- 移行戦略とテスト戦略
-- パフォーマンスとセキュリティ考慮事項
+### 2. Requirements Collection (`spec.create-requirements`)
 
-### 4. 挨拶機能 (`greeting`)
+- Structure user stories
+- Generate acceptance criteria in the EARS format
+- Produce testable requirements documents
 
-- 基本的な挨拶とポリシー表示
+### 3. Design Document Generation (`spec.design`)
 
-## 使用方法
+- Design system architecture
+- Define component designs and API specifications
+- Plan migration and testing strategies
+- Address performance and security considerations
 
-Spec Pilotは4つのMCPプロンプトを提供します。各プロンプトは特定の引数を受け取り、構造化されたプロンプトを生成します。
+### 4. Greeting (`greeting`)
 
-### 利用可能なプロンプト
+- Provide a basic greeting and display project policies
 
-| プロンプト名               | 説明                 | 必須引数                   | オプション引数   |
-| -------------------------- | -------------------- | -------------------------- | ---------------- |
-| `greeting`                 | 挨拶とポリシー表示   | `name` (string)            | -                |
-| `spec.init`                | ワークスペース初期化 | `specDescription` (string) | `locale` (ja/en) |
-| `spec.create-requirements` | 要件定義生成         | `specName` (string)        | -                |
-| `spec.design`              | 設計ドキュメント生成 | `specName` (string)        | -                |
+## Usage
 
-### 使用例
+Spec Pilot exposes four MCP prompts. Each one accepts defined arguments and returns structured responses.
 
-#### Claude Desktopの場合
+### Available Prompts
 
-**プロジェクト初期化:**
+| Prompt Name               | Description              | Required Arguments           | Optional Arguments |
+| ------------------------- | ------------------------ | ---------------------------- | ------------------ |
+| `greeting`                | Greeting and policy info | `name` (string)              | -                  |
+| `spec.init`               | Initialize workspace     | `specDescription` (string)   | `locale` (ja/en)   |
+| `spec.create-requirements` | Generate requirements    | `specName` (string)          | -                  |
+| `spec.design`             | Generate design document | `specName` (string)          | -                  |
 
-```
-@spec.init specDescription="ユーザー認証システムの構築" locale="ja"
-```
+### Examples
 
-**要件定義生成:**
+#### Amazon Q CLI
 
-```
-@spec.create-requirements specName="user-auth-system"
-```
-
-**設計ドキュメント生成:**
+**Initialize a project:**
 
 ```
-@spec.design specName="user-auth-system"
+@spec.init "Build a user authentication system" "en"
 ```
 
-#### Amazon Q CLIの場合
-
-**プロジェクト初期化:**
-
-```
-@spec.init "ユーザー認証システムの構築" "ja"
-```
-
-**要件定義生成:**
+**Generate requirements:**
 
 ```
 @spec.create-requirements "user-auth-system"
 ```
 
-**設計ドキュメント生成:**
+**Generate a design document:**
 
 ```
 @spec.design "user-auth-system"
 ```
 
-## ファイル詳細
+## File Details
 
-### グローバル設定 (`.kiro/spec-pilot.json`)
+### Global Settings (`.kiro/spec-pilot.json`)
 
 ```json
 {
@@ -104,93 +88,90 @@ Spec Pilotは4つのMCPプロンプトを提供します。各プロンプトは
 }
 ```
 
-### プロジェクト設定 (`config.json`)
+### Project Settings (`config.json`)
 
 ```json
 {
   "title": "project-name",
-  "description": "プロジェクトの説明"
+  "description": "Project description"
 }
 ```
 
-### 生成されるドキュメント
+### Generated Documents
 
-- **`requirements.md`**: EARS形式の受け入れ基準を含む構造化された要件ドキュメント
-- **`design.md`**: アーキテクチャ、コンポーネント設計、移行戦略等を含む包括的な設計ドキュメント
+- **`requirements.md`**: Structured requirements document with EARS-based acceptance criteria
+- **`design.md`**: Comprehensive design document covering architecture, component design, migration strategy, and more
 
-## 設定
+## Configuration
 
-### サポート言語
+### Supported Languages
 
-- `ja` (日本語) - デフォルト
-- `en` (英語)
+- `ja` (Japanese) - default
+- `en` (English)
 
-言語設定は`.kiro/spec-pilot.json`ファイルで管理され、初回実行時に自動作成されます。
+Language settings are managed in `.kiro/spec-pilot.json`, which is created automatically during the first run.
 
-## 開発・ビルド
+## Development & Build
 
-### 開発スクリプト
+### Development Scripts
 
 ```bash
-# 開発
-pnpm build          # TypeScriptビルド
-pnpm test           # テスト実行
-pnpm test:watch     # テスト監視モード
+# Development
+pnpm build          # TypeScript build
+pnpm test           # Run tests
+pnpm test:watch     # Watch mode for tests
 
-# コード品質
-pnpm lint           # ESLintチェック
-pnpm lint:fix       # ESLint自動修正
-pnpm format         # Prettierチェック
-pnpm format:write   # Prettier自動フォーマット
-pnpm typecheck      # 型チェック
+# Code quality
+pnpm lint           # Run ESLint checks
+pnpm lint:fix       # Auto-fix ESLint issues
+pnpm format         # Check formatting with Prettier
+pnpm format:write   # Automatically format with Prettier
+pnpm typecheck      # Run type checking
 
-# その他
-pnpm clean          # ビルド成果物削除
+# Miscellaneous
+pnpm clean          # Remove build artifacts
 ```
 
-### ビルド成果物
+### Build Artifacts
 
-- `dist/index.js` - メインのMCPサーバー
-- `dist/index.d.ts` - TypeScript型定義
-- `prompts/` - プロンプトテンプレート
+- `dist/index.js` - Main MCP server
+- `dist/index.d.ts` - TypeScript type definitions
+- `prompts/` - Prompt templates
 
-## ロードマップ
+## Roadmap
 
-### 完了済み機能
+### Completed Features
 
-- [x] ワークスペース初期化 (`spec.init`)
-- [x] 要件定義生成 (`spec.create-requirements`)
-- [x] 設計ドキュメント生成 (`spec.design`)
-- [x] 多言語サポート (日本語・英語)
-- [x] EARS形式の受け入れ基準生成
+- [x] Workspace initialization (`spec.init`)
+- [x] Requirements generation (`spec.create-requirements`)
+- [x] Design document generation (`spec.design`)
+- [x] Multilingual support (Japanese & English)
+- [x] Generation of EARS-based acceptance criteria
 
-### 開発予定機能
+### Planned Features
 
-- [ ] **タスク生成機能 (`spec.tasks`)** - 要件・設計からの実装タスク自動生成
-  - [ ] 要件に基づく開発タスクの分解
-  - [ ] 設計ドキュメントからの実装手順生成
-  - [ ] GitHub Issues / プロジェクト管理ツール連携
-  - [ ] 優先度付けとスケジューリング支援
+- [ ] **Task generation (`spec.tasks`)** - Automatically create implementation tasks from requirements and design
+  - [ ] Break down development tasks based on requirements
+  - [ ] Generate implementation steps from design documents
+  - [ ] Integrate with GitHub Issues / project management tools
+  - [ ] Support prioritization and scheduling
 
-- [ ] **npmパッケージ公開**
-  - [ ] パッケージメタデータの最適化
-  - [ ] バージョン管理自動化
-  - [ ] CI/CDパイプラインによる自動公開
-  - [ ] npmレジストリへの安定版リリース
+- [ ] **Publish as an npm package**
+  - [ ] Optimize package metadata
+  - [ ] Automate version management
+  - [ ] Set up CI/CD pipelines for automated publishing
+  - [ ] Release stable versions to the npm registry
 
-## 技術仕様
+## Technical Specifications
 
-- **言語**: TypeScript 5.6+
-- **ランタイム**: Node.js 22+
-- **パッケージマネージャー**: pnpm
-- **ビルドツール**: tsdown
-- **テストフレームワーク**: Vitest
-- **プロトコル**: Model Context Protocol 1.18+
+- **Language**: TypeScript 5.6+
+- **Runtime**: Node.js 22+
+- **Package Manager**: pnpm
+- **Build Tool**: tsdown
+- **Test Framework**: Vitest
+- **Protocol**: Model Context Protocol 1.18+
 
-## ライセンス
+## License
 
-MIT License - 詳細は [LICENSE](./LICENSE) を参照
+MIT License — see [LICENSE](./LICENSE) for details.
 
-## 作者
-
-mzkmnk

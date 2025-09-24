@@ -74,7 +74,7 @@ export const registerSpecInitPrompt = (server: McpServer) => {
         `- folder: "<final folder name>"`,
         `- path: "${SPEC_PILOT_CONSTANTS.BASE_DIR}/<folder>"`,
         `- uniquenessCheck: "<decision and adjustment>"`,
-        `- next: "Run @spec.create-requirements with specName=<folder>"`,
+        `- next: "Run @spec.create-requirements <specName>"`,
         `- notes: "<optional>"`,
         "",
         "- If the name is not finalized, list missing info in `notes` and request re-input.",

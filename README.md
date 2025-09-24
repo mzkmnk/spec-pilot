@@ -49,12 +49,12 @@ Spec Pilot exposes four MCP prompts. Each one accepts defined arguments and retu
 
 ### Available Prompts
 
-| Prompt Name               | Description              | Required Arguments           | Optional Arguments |
-| ------------------------- | ------------------------ | ---------------------------- | ------------------ |
-| `greeting`                | Greeting and policy info | `name` (string)              | -                  |
-| `spec.init`               | Initialize workspace     | `specDescription` (string)   | `locale` (ja/en)   |
-| `spec.create-requirements` | Generate requirements    | `specName` (string)          | -                  |
-| `spec.design`             | Generate design document | `specName` (string)          | -                  |
+| Prompt Name                | Description              | Required Arguments         | Optional Arguments |
+| -------------------------- | ------------------------ | -------------------------- | ------------------ |
+| `greeting`                 | Greeting and policy info | `name` (string)            | -                  |
+| `spec.init`                | Initialize workspace     | `specDescription` (string) | `locale` (ja/en)   |
+| `spec.create-requirements` | Generate requirements    | `specName` (string)        | -                  |
+| `spec.design`              | Generate design document | `specName` (string)        | -                  |
 
 ### Examples
 
@@ -174,4 +174,3 @@ pnpm clean          # Remove build artifacts
 ## License
 
 MIT License — see [LICENSE](./LICENSE) for details.
-

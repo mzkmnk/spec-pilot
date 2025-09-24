@@ -56,24 +56,15 @@ Spec Pilot exposes five MCP prompts. Each one accepts defined arguments and retu
 
 ### Available Prompts
 
-| Prompt Name                | Description                     | Required Arguments         | Optional Arguments |
-| -------------------------- | ------------------------------- | -------------------------- | ------------------ |
-| `greeting`                 | Greeting and policy info        | `name` (string)            | -                  |
-| `spec.init`                | Initialize workspace            | `specDescription` (string) | `locale` (ja/en)   |
-| `spec.create-requirements` | Generate requirements           | `specName` (string)        | -                  |
-| `spec.design`              | Generate design document        | `specName` (string)        | -                  |
-| `spec.create-tasks`        | Generate implementation tasks   | `specName` (string)        | -                  |
+| Prompt Name                | Description                   | Required Arguments         | Optional Arguments |
+| -------------------------- | ----------------------------- | -------------------------- | ------------------ |
+| `greeting`                 | Greeting and policy info      | `name` (string)            | -                  |
+| `spec.init`                | Initialize workspace          | `specDescription` (string) | `locale` (ja/en)   |
+| `spec.create-requirements` | Generate requirements         | `specName` (string)        | -                  |
+| `spec.design`              | Generate design document      | `specName` (string)        | -                  |
+| `spec.create-tasks`        | Generate implementation tasks | `specName` (string)        | -                  |
 
 ### Examples
-
-#### Claude Desktop
-
-```
-@spec.init specDescription="Build a user authentication system" locale="en"
-@spec.create-requirements specName="user-auth-system"
-@spec.design specName="user-auth-system"
-@spec.create-tasks specName="user-auth-system"
-```
 
 #### Amazon Q CLI
 
@@ -194,7 +185,3 @@ pnpm clean          # Remove build artifacts
 ## License
 
 MIT License — see [LICENSE](./LICENSE) for details.
-
-## Author
-
-mzkmnk

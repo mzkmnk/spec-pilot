@@ -3,6 +3,7 @@ import { z } from "zod";
 import { SPEC_PILOT_CONSTANTS } from "../shared/constants";
 import { createLanguagePolicySection } from "../shared/language-policy";
 import { resolveStoredLocale } from "../shared/locale";
+import { createProjectAnalysisSection } from "../shared/project-analysis";
 import { createPromptResponse, joinPromptSections } from "../shared/prompt-factory";
 
 export const registerSpecImplTasksPrompt = (server: McpServer) => {
@@ -56,6 +57,8 @@ export const registerSpecImplTasksPrompt = (server: McpServer) => {
         "## Goal",
         "- Validate the implementation workspace and EXECUTE the requested tasks completely.",
         "- Implement the selected tasks by creating/modifying code files, running tests, and updating progress tracking.",
+        "",
+        createProjectAnalysisSection(),
         "",
         "## Tasks",
         "1. Validate the workspace:",

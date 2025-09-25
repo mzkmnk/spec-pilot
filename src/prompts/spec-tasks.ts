@@ -3,6 +3,7 @@ import { z } from "zod";
 import { SPEC_PILOT_CONSTANTS } from "../shared/constants";
 import { createLanguagePolicySection } from "../shared/language-policy";
 import { resolveStoredLocale } from "../shared/locale";
+import { createProjectAnalysisSection } from "../shared/project-analysis";
 import { createPromptResponse, joinPromptSections } from "../shared/prompt-factory";
 
 export const registerSpecTasksPrompt = (server: McpServer) => {
@@ -47,6 +48,8 @@ export const registerSpecTasksPrompt = (server: McpServer) => {
         "## Goal",
         "- Transform requirements and design documents into actionable, testable implementation tasks.",
         "- Generate a structured task list that enables step-by-step development with clear progress tracking.",
+        "",
+        createProjectAnalysisSection(),
         "",
         "## Tasks",
         "1. Verify the workspace:",

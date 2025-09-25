@@ -3,6 +3,7 @@ import { z } from "zod";
 import { SPEC_PILOT_CONSTANTS } from "../shared/constants";
 import { createLanguagePolicySection } from "../shared/language-policy";
 import { resolveStoredLocale } from "../shared/locale";
+import { createProjectAnalysisSection } from "../shared/project-analysis";
 import { createPromptResponse, joinPromptSections } from "../shared/prompt-factory";
 
 export const registerSpecDesignPrompt = (server: McpServer) => {
@@ -44,6 +45,8 @@ export const registerSpecDesignPrompt = (server: McpServer) => {
         "## Goal",
         "- Transform structured requirements into a comprehensive, implementable system design.",
         "- Generate a design document that enables seamless transition from specification to implementation.",
+        "",
+        createProjectAnalysisSection(),
         "",
         "## Tasks",
         "1. Verify the workspace:",

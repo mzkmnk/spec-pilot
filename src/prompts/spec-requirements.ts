@@ -3,6 +3,7 @@ import { z } from "zod";
 import { SPEC_PILOT_CONSTANTS } from "../shared/constants";
 import { createLanguagePolicySection } from "../shared/language-policy";
 import { resolveStoredLocale } from "../shared/locale";
+import { createProjectAnalysisSection } from "../shared/project-analysis";
 import { createPromptResponse, joinPromptSections } from "../shared/prompt-factory";
 
 export const registerSpecRequirementsPrompt = (server: McpServer) => {
@@ -41,6 +42,8 @@ export const registerSpecRequirementsPrompt = (server: McpServer) => {
         "",
         "## Goal",
         "- Validate the initialized spec workspace and convert the specification description into structured, testable EARS statements while matching the target requirements house style.",
+        "",
+        createProjectAnalysisSection(),
         "",
         "## Tasks",
         "1. Verify the workspace:",

@@ -11,3 +11,6 @@ coverage
 # editors
 .vscode
 .DS_Store
+
+# amazon q cli todo list
+.amazonq/cli-todo-lists/

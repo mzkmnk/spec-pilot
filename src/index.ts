@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { registerGreetingPrompt } from "./prompts/greeting";
 import { registerSpecDesignPrompt } from "./prompts/spec-design";
+import { registerSpecImplTasksPrompt } from "./prompts/spec-impl-tasks";
 import { registerSpecInitPrompt } from "./prompts/spec-init";
 import { registerSpecRequirementsPrompt } from "./prompts/spec-requirements";
 import { registerSpecTasksPrompt } from "./prompts/spec-tasks";
@@ -34,6 +35,7 @@ registerSpecInitPrompt(server);
 registerSpecRequirementsPrompt(server);
 registerSpecDesignPrompt(server);
 registerSpecTasksPrompt(server);
+registerSpecImplTasksPrompt(server);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

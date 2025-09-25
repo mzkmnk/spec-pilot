@@ -49,7 +49,7 @@ export const registerSpecImplTasksPrompt = (server: McpServer) => {
         "",
         "## Implementation Mandate",
         "- This prompt MUST perform actual code implementation, not just planning",
-        "- Each selected task MUST result in concrete file creation/modification", 
+        "- Each selected task MUST result in concrete file creation/modification",
         "- TypeScript files MUST be compiled and type-checked for correctness",
         "- Tasks MUST be marked as completed [x] in tasks.md upon successful implementation",
         "",
